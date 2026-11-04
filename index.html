@@ -73,7 +73,7 @@ layout: default
   <div class="wrap schmal">
     <h2>Nachricht schreiben</h2>
     <!-- Web3Forms: leitet die Nachricht an die beim Key hinterlegte E-Mail weiter. -->
-    <form method="POST" action="https://api.web3forms.com/submit" class="formular">
+    <form id="kontaktformular" method="POST" action="https://api.web3forms.com/submit" class="formular" data-danke="{{ '/danke/' | relative_url }}">
       <input type="hidden" name="access_key" value="{{ s.web3forms_key }}">
       <input type="hidden" name="subject" value="Neue Anfrage über {{ site.url | remove: 'https://' }}">
       <input type="hidden" name="redirect" value="{{ '/danke/' | absolute_url }}">
@@ -86,7 +86,27 @@ layout: default
         <span>Ich habe die <a href="{{ '/datenschutz/' | relative_url }}">Datenschutzerklärung</a> gelesen. Meine Angaben werden nur zur Beantwortung der Anfrage genutzt.</span>
       </label>
       <button class="knopf" type="submit">Absenden</button>
+      <p class="formular-fehler" role="alert" hidden>Senden hat leider nicht geklappt. Bitte rufen Sie uns an oder schreiben Sie eine E-Mail.</p>
     </form>
+    <script>
+      // Sendet im Hintergrund (ohne Zwischenseite von Web3Forms) und leitet dann auf /danke/ weiter.
+      (function () {
+        var f = document.getElementById('kontaktformular');
+        if (!f || !window.fetch) return;
+        f.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var btn = f.querySelector('button[type=submit]');
+          var err = f.querySelector('.formular-fehler');
+          btn.disabled = true; err.hidden = true;
+          var data = {};
+          new FormData(f).forEach(function (v, k) { data[k] = v; });
+          fetch(f.action, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) })
+            .then(function (r) { return r.json(); })
+            .then(function (j) { if (j && j.success) window.location.href = f.dataset.danke; else throw new Error(); })
+            .catch(function () { btn.disabled = false; err.hidden = false; });
+        });
+      })();
+    </script>
   </div>
   {%- endif %}
 </section>
