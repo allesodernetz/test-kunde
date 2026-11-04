@@ -9,7 +9,7 @@
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:title" content="{{ page.title | default: s.firma }}">
   <meta property="og:description" content="{{ s.beschreibung_seo }}">
-  {%- if s.hero_bild != "" %}<meta property="og:image" content="{{ s.hero_bild | absolute_url }}">{% endif %}
+  {%- if s.hero_bild and s.hero_bild != "" %}<meta property="og:image" content="{{ s.hero_bild | absolute_url }}">{% endif %}
   {%- if page.noindex or site.noindex %}<meta name="robots" content="noindex">{% endif %}
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <style>:root { --akzent: {{ s.akzentfarbe | default: '#b4532a' }}; }</style>
@@ -20,7 +20,7 @@
   <header class="kopf">
     <div class="wrap kopf__inner">
       <a class="marke" href="{{ '/' | relative_url }}">
-        {%- if s.logo != "" -%}<img src="{{ s.logo | relative_url }}" alt="{{ s.firma }}" height="40">{%- else -%}{{ s.firma }}{%- endif -%}
+        {%- if s.logo and s.logo != "" -%}<img src="{{ s.logo | relative_url }}" alt="{{ s.firma }}" height="40">{%- else -%}{{ s.firma }}{%- endif -%}
       </a>
       <nav aria-label="Hauptnavigation">
         <a href="{{ '/' | relative_url }}#ueber">Über uns</a>

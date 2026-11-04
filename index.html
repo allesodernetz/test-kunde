@@ -6,16 +6,16 @@ layout: default
   <div class="wrap hero__inner">
     <div>
       <h1>{{ s.firma }}</h1>
-      {%- if s.claim != "" %}<p class="hero__claim">{{ s.claim }}</p>{% endif %}
-      {%- if s.hero_button_text != "" %}<a class="knopf" href="{{ s.hero_button_link }}">{{ s.hero_button_text }}</a>{% endif %}
+      {%- if s.claim and s.claim != "" %}<p class="hero__claim">{{ s.claim }}</p>{% endif %}
+      {%- if s.hero_button_text and s.hero_button_text != "" %}<a class="knopf" href="{{ s.hero_button_link }}">{{ s.hero_button_text }}</a>{% endif %}
     </div>
-    {%- if s.hero_bild != "" %}
+    {%- if s.hero_bild and s.hero_bild != "" %}
     <img class="hero__bild" src="{{ s.hero_bild | relative_url }}" alt="" width="640" height="480">
     {%- endif %}
   </div>
 </section>
 
-{%- if s.ueber_text != "" %}
+{%- if s.ueber_text and s.ueber_text != "" %}
 <section id="ueber" class="abschnitt">
   <div class="wrap schmal">
     <h2>{{ s.ueber_titel }}</h2>
@@ -49,13 +49,13 @@ layout: default
         {{ s.adresse | newline_to_br }}
       </address>
       <p>
-        {%- if s.telefon != "" %}Telefon: <a href="tel:{{ s.telefon | remove: ' ' }}">{{ s.telefon }}</a><br>{% endif %}
-        {%- if s.email != "" %}E-Mail: <a href="mailto:{{ s.email }}">{{ s.email }}</a>{% endif %}
+        {%- if s.telefon and s.telefon != "" %}Telefon: <a href="tel:{{ s.telefon | remove: ' ' }}">{{ s.telefon }}</a><br>{% endif %}
+        {%- if s.email and s.email != "" %}E-Mail: <a href="mailto:{{ s.email }}">{{ s.email }}</a>{% endif %}
       </p>
-      {%- if s.karten_link != "" %}<p><a href="{{ s.karten_link }}" rel="noopener" target="_blank">Route planen ↗</a></p>{% endif %}
-      {%- assign hat_social = s.social | where_exp: "x", "x.url != ''" -%}
-      {%- if hat_social.size > 0 %}
-      <p class="social">{% for x in hat_social %}<a href="{{ x.url }}" rel="noopener" target="_blank">{{ x.name }}</a>{% endfor %}</p>
+      {%- if s.karten_link and s.karten_link != "" %}<p><a href="{{ s.karten_link }}" rel="noopener" target="_blank">Route planen ↗</a></p>{% endif %}
+      {%- capture social_links -%}{% for x in s.social %}{% if x.url and x.url != "" %}<a href="{{ x.url }}" rel="noopener" target="_blank">{{ x.name }}</a>{% endif %}{% endfor %}{%- endcapture -%}
+      {%- if social_links != "" %}
+      <p class="social">{{ social_links }}</p>
       {%- endif %}
     </div>
 
@@ -69,7 +69,7 @@ layout: default
     {%- endif %}
   </div>
 
-  {%- if s.kontaktformular and s.web3forms_key != "" %}
+  {%- if s.kontaktformular and s.web3forms_key and s.web3forms_key != "" %}
   <div class="wrap schmal">
     <h2>Nachricht schreiben</h2>
     <!-- Web3Forms: leitet die Nachricht an die beim Key hinterlegte E-Mail weiter. -->
