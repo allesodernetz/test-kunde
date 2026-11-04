@@ -1,0 +1,11 @@
+# Weiterleitungen alter Adressen (nur bei Relaunch einer bestehenden Seite).
+# Wird von Cloudflare Pages und Netlify gelesen. Format: alte-Adresse  neue-Adresse  301
+# 301 = dauerhaft umgezogen -> Google überträgt die alte Platzierung auf die neue Adresse.
+# Zeilen mit # sind Kommentare. Neue Kunden ohne alte Seite: Datei einfach so lassen.
+#
+# Beispiele (das # am Anfang entfernen):
+# /leistungen.html     /#leistungen     301
+# /ueber-uns           /#team           301
+# /kontakt.php         /#kontakt        301
+# /impressum.html      /impressum/      301
+# /datenschutz.html    /datenschutz/    301

@@ -1,0 +1,92 @@
+---
+layout: default
+---
+{%- assign s = site.data.site -%}
+<section class="hero">
+  <div class="wrap hero__inner">
+    <div>
+      <h1>{{ s.firma }}</h1>
+      {%- if s.claim != "" %}<p class="hero__claim">{{ s.claim }}</p>{% endif %}
+      {%- if s.hero_button_text != "" %}<a class="knopf" href="{{ s.hero_button_link }}">{{ s.hero_button_text }}</a>{% endif %}
+    </div>
+    {%- if s.hero_bild != "" %}
+    <img class="hero__bild" src="{{ s.hero_bild | relative_url }}" alt="" width="640" height="480">
+    {%- endif %}
+  </div>
+</section>
+
+{%- if s.ueber_text != "" %}
+<section id="ueber" class="abschnitt">
+  <div class="wrap schmal">
+    <h2>{{ s.ueber_titel }}</h2>
+    {{ s.ueber_text | markdownify }}
+  </div>
+</section>
+{%- endif %}
+
+{%- if s.leistungen.size > 0 %}
+<section class="abschnitt abschnitt--hell">
+  <div class="wrap">
+    <h2>{{ s.leistungen_titel }}</h2>
+    <ul class="karten">
+      {%- for l in s.leistungen %}
+      <li class="karte">
+        <h3>{{ l.titel }}</h3>
+        <p>{{ l.text }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+{%- endif %}
+
+<section id="kontakt" class="abschnitt">
+  <div class="wrap kontakt">
+    <div>
+      <h2>Kontakt</h2>
+      <address>
+        <strong>{{ s.firma }}</strong><br>
+        {{ s.adresse | newline_to_br }}
+      </address>
+      <p>
+        {%- if s.telefon != "" %}Telefon: <a href="tel:{{ s.telefon | remove: ' ' }}">{{ s.telefon }}</a><br>{% endif %}
+        {%- if s.email != "" %}E-Mail: <a href="mailto:{{ s.email }}">{{ s.email }}</a>{% endif %}
+      </p>
+      {%- if s.karten_link != "" %}<p><a href="{{ s.karten_link }}" rel="noopener" target="_blank">Route planen ↗</a></p>{% endif %}
+      {%- assign hat_social = s.social | where_exp: "x", "x.url != ''" -%}
+      {%- if hat_social.size > 0 %}
+      <p class="social">{% for x in hat_social %}<a href="{{ x.url }}" rel="noopener" target="_blank">{{ x.name }}</a>{% endfor %}</p>
+      {%- endif %}
+    </div>
+
+    {%- if s.oeffnungszeiten.size > 0 %}
+    <div>
+      <h2>Öffnungszeiten</h2>
+      <dl class="zeiten">
+        {%- for z in s.oeffnungszeiten %}<dt>{{ z.tage }}</dt><dd>{{ z.zeit }}</dd>{% endfor %}
+      </dl>
+    </div>
+    {%- endif %}
+  </div>
+
+  {%- if s.kontaktformular and s.web3forms_key != "" %}
+  <div class="wrap schmal">
+    <h2>Nachricht schreiben</h2>
+    <!-- Web3Forms: leitet die Nachricht an die beim Key hinterlegte E-Mail weiter. -->
+    <form method="POST" action="https://api.web3forms.com/submit" class="formular">
+      <input type="hidden" name="access_key" value="{{ s.web3forms_key }}">
+      <input type="hidden" name="subject" value="Neue Anfrage über {{ site.url | remove: 'https://' }}">
+      <input type="hidden" name="redirect" value="{{ '/danke/' | absolute_url }}">
+      <input type="checkbox" name="botcheck" class="versteckt" style="display:none" tabindex="-1" autocomplete="off">
+      <label>Name <input name="name" required autocomplete="name"></label>
+      <label>E-Mail <input type="email" name="email" required autocomplete="email"></label>
+      <label>Nachricht <textarea name="nachricht" rows="5" required></textarea></label>
+      <label class="check">
+        <input type="checkbox" name="datenschutz" required>
+        <span>Ich habe die <a href="{{ '/datenschutz/' | relative_url }}">Datenschutzerklärung</a> gelesen. Meine Angaben werden nur zur Beantwortung der Anfrage genutzt.</span>
+      </label>
+      <button class="knopf" type="submit">Absenden</button>
+    </form>
+  </div>
+  {%- endif %}
+</section>

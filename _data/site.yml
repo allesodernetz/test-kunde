@@ -1,0 +1,49 @@
+# Alle Texte, Bilder und Links der Website.
+# Der Kunde bearbeitet diese Datei über den Admin-Bereich (Pages CMS),
+# nicht direkt. Felder leer lassen = Abschnitt wird ausgeblendet.
+
+firma: "Tischlerei Muster"
+claim: "Möbel nach Maß, Innenausbau und Reparaturen in Köln"
+beschreibung_seo: "Testseite von allesodernetz.de – erfundener Tischlerbetrieb."
+akzentfarbe: "#8a5a2b"
+logo: ""
+hero_bild: "/assets/images/werkstatt.jpg"
+hero_button_text: "Angebot anfragen"
+hero_button_link: "#kontakt"
+
+ueber_titel: "Über uns"
+ueber_text: |
+  Seit 2009 bauen wir Möbel, die genau passen – vom Einbauschrank bis zur Küchenfront.
+  **Das ist eine Testseite.** Ändere diesen Text im Admin-Bereich und schau, ob er online ankommt.
+
+leistungen_titel: "Was wir anbieten"
+leistungen:
+  - titel: "Möbel nach Maß"
+    text: "Schränke, Regale und Tische, genau für deinen Raum."
+  - titel: "Innenausbau"
+    text: "Türen, Treppen, Dachschrägen."
+  - titel: "Reparaturen"
+    text: "Schubladen, Scharniere, Oberflächen – schnell erledigt."
+
+oeffnungszeiten:
+  - tage: "Mo–Fr"
+    zeit: "7–16 Uhr"
+  - tage: "Sa"
+    zeit: "nach Vereinbarung"
+
+adresse: |
+  Musterstraße 1
+  50733 Köln
+telefon: ""
+email: "mail@allesodernetz.de"
+karten_link: ""   # z. B. Link zu Google Maps (nur Link, keine eingebettete Karte!)
+
+social:
+  - name: "Instagram"
+    url: ""
+
+# Kontaktformular über Web3Forms (kostenlos, web3forms.com):
+# Key mit der Kunden-E-Mail anlegen und hier eintragen. Nur einschalten,
+# wenn die Datenschutzerklärung den Web3Forms-Abschnitt enthält.
+kontaktformular: true
+web3forms_key: "3e05c36c-f99f-45f0-a7a0-a75615eed673"

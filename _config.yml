@@ -1,0 +1,23 @@
+# Jekyll-Grundkonfiguration – pro Kunde nur title/url anpassen.
+# Alle Inhalte, die der Kunde selbst ändert, liegen in _data/site.yml.
+title: "Tischlerei Muster (Testseite)"
+lang: de
+url: "https://allesodernetz.github.io"   # Kunden-Domain eintragen
+baseurl: "/test-kunde"
+# true = ganze Seite nicht bei Google (für Entwürfe/Testseiten)
+noindex: true
+
+markdown: kramdown
+permalink: pretty
+
+# Dateien mit _ am Anfang würde Jekyll sonst weglassen
+include:
+  - _redirects
+
+exclude:
+  - README.md
+  - CHECKLISTE-NEUER-KUNDE.md
+  - Gemfile
+  - Gemfile.lock
+  - netlify.toml
+  - vendor

@@ -1,0 +1,61 @@
+# Pages CMS – Admin-Bereich für den Kunden (app.pagescms.org).
+# Kunde wird per E-Mail als "Collaborator" eingeladen, braucht KEIN GitHub-Konto.
+media:
+  input: assets/images
+  output: /assets/images
+
+content:
+  - name: website
+    label: Website-Inhalte
+    type: file
+    path: _data/site.yml
+    format: yaml
+    fields:
+      - { name: firma, label: Firmenname, type: string, required: true }
+      - { name: claim, label: Kurzer Slogan unter dem Namen, type: string }
+      - { name: beschreibung_seo, label: Beschreibung für Google (1–2 Sätze), type: text }
+      - { name: akzentfarbe, label: "Akzentfarbe (z. B. #b4532a)", type: string }
+      - { name: logo, label: Logo (optional), type: image }
+      - { name: hero_bild, label: Großes Bild oben, type: image }
+      - { name: hero_button_text, label: Button-Text oben, type: string }
+      - { name: hero_button_link, label: Button-Link oben, type: string }
+      - { name: ueber_titel, label: 'Überschrift „Über uns“', type: string }
+      - { name: ueber_text, label: 'Text „Über uns“', type: rich-text }
+      - { name: leistungen_titel, label: Überschrift Angebot, type: string }
+      - name: leistungen
+        label: Angebot / Leistungen
+        type: object
+        list: true
+        fields:
+          - { name: titel, label: Titel, type: string }
+          - { name: text, label: Text, type: text }
+      - name: oeffnungszeiten
+        label: Öffnungszeiten
+        type: object
+        list: true
+        fields:
+          - { name: tage, label: Tage, type: string }
+          - { name: zeit, label: Uhrzeit, type: string }
+      - { name: adresse, label: Adresse, type: text }
+      - { name: telefon, label: Telefon, type: string }
+      - { name: email, label: E-Mail, type: string }
+      - { name: karten_link, label: Link zur Route (z. B. Google Maps), type: string }
+      - name: social
+        label: Social-Media-Links
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name (z. B. Instagram), type: string }
+          - { name: url, label: Link, type: string }
+      - { name: kontaktformular, label: Kontaktformular anzeigen (nur nach Rücksprache!), type: boolean }
+      - { name: web3forms_key, label: "Formular-Schlüssel (Web3Forms – nicht ändern)", type: string }
+
+  - name: impressum
+    label: Impressum
+    type: file
+    path: impressum.md
+
+  - name: datenschutz
+    label: Datenschutzerklärung
+    type: file
+    path: datenschutz.md
